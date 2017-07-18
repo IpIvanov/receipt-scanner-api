@@ -18,7 +18,7 @@ var config = {
       name: 'receipt-scanner-api'
     },
     port: process.env.PORT || 3000,
-    db: 'mongodb://heroku_lmg4nh8l:heroku_lmg4nh8l@ds159112.mlab.com:59112/heroku_lmg4nh8l'
+    db: 'mongodb://receipt-user:receipt-user3@ds159112.mlab.com:59112/heroku_lmg4nh8l'
   },
 
   production: {
@@ -27,7 +27,7 @@ var config = {
       name: 'receipt-scanner-api'
     },
     port: process.env.PORT || 3000,
-    db: 'mongodb://heroku_lmg4nh8l:heroku_lmg4nh8l@ds159112.mlab.com:59112/heroku_lmg4nh8l'
+    db: 'mongodb://receipt-user:receipt-user3@ds159112.mlab.com:59112/heroku_lmg4nh8l'
   }
 };
 

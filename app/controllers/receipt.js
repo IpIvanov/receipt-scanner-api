@@ -6,12 +6,11 @@ var express = require('express'),
 
 
 module.exports = function (app) {
-  app.get('/', router);
-
-  app.get('/receipt', function (req, res, next) {
+  app.get('/receipts', function (req, res, next) {
     var options = {
       l: 'eng',
     };
+    
     tesseract.process(__dirname + '/pictures/image.jpg', options, function (err, text) {
       if (err) {
         console.error(err);
