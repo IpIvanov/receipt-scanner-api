@@ -8,10 +8,5 @@ var ReceiptSchema = new Schema({
   date: Date
 });
 
-ReceiptSchema.virtual('id')
-  .get(function(){
-    return this._id.getTimestamp();
-  });
-
 mongoose.model('Receipt', ReceiptSchema);
 
