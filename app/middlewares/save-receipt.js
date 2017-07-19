@@ -11,7 +11,7 @@ module.exports = function (req, res, next) {
     if (error) {
       res.status(500).end(error);
     }
-    res.send(receipt.toString());
+    res.json(receipt);
     next();
   });
 }

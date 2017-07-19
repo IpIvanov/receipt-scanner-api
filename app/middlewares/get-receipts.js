@@ -6,7 +6,7 @@ module.exports = function (req, res, next) {
     let receiptId = req.query.id;
     Receipt.findById(receiptId, function (err, receipt){
       if(receipt) {
-        res.send(receipt);
+        res.json(receipt);
       } else {
         res.json({error: 'No receipt found'})
       }
@@ -15,7 +15,7 @@ module.exports = function (req, res, next) {
   }
   else {
     Receipt.find({}, function(err, receipts) {
-      res.send(receipts);
+      res.json(receipts);
       next();
     });
   }

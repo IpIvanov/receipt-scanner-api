@@ -10,7 +10,7 @@ module.exports = function (req, res, next) {
       doc.type = data.type;
       doc.save(function(err){
         if (err) {
-          res.send(err);
+          res.json(err);
         }
         res.json({message: 'Receipt updated'});
       })
