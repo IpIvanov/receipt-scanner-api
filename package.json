@@ -23,9 +23,7 @@
     "mongoose": "^4.1.2",
     "morgan": "^1.6.1",
     "node-tesseract": "^0.2.7",
-    "serve-favicon": "^2.3.0"
-  },
-  "devDependencies": {
+    "serve-favicon": "^2.3.0",
     "chai": "^3.5.0",
     "debug": "^2.2.0",
     "gulp": "^3.9.1",
