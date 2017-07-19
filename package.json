@@ -1,7 +1,7 @@
 {
   "name": "receipt-scanner-api",
   "version": "0.0.1",
-  "private": true,
+  "private": false,
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
