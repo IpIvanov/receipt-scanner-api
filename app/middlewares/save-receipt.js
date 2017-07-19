@@ -4,8 +4,7 @@ var mongoose = require('mongoose'),
 
 module.exports = function (req, res, next) {
   var receipt = new Receipt({
-    total: req.receiptTotal,
-    date: new Date()
+    total: req.receiptTotal
   })
 
   receipt.save(function (error, receipt) {
@@ -13,9 +12,6 @@ module.exports = function (req, res, next) {
       res.status(500).end(error);
     }
     res.send(receipt.toString());
-
-    console.log(receipt);
-
     next();
   });
 }
