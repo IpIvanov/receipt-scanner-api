@@ -7,9 +7,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var compress = require('compression');
 var methodOverride = require('method-override');
-var formidable = require('express-formidable');
 
-module.exports = function(app, config) {
+module.exports = function (app, config) {
   var env = process.env.NODE_ENV || 'development';
   app.locals.ENV = env;
   app.locals.ENV_DEVELOPMENT = env == 'development';
@@ -24,11 +23,10 @@ module.exports = function(app, config) {
   app.use(compress());
   app.use(express.static(config.root + '/public'));
   app.use(methodOverride());
-  app.use(formidable());
-
+  
   var controllers = glob.sync(config.root + '/app/controllers/*.js');
   controllers.forEach(function (controller) {
-    require(controller)(app);
+    require(controller)(app, config);
   });
 
   app.use(function (req, res, next) {
@@ -36,8 +34,8 @@ module.exports = function(app, config) {
     err.status = 404;
     next(err);
   });
-  
-  if(app.get('env') === 'development'){
+
+  if (app.get('env') === 'development') {
     app.use(function (err, req, res, next) {
       res.status(err.status || 500);
       res.end('error', {
@@ -50,11 +48,11 @@ module.exports = function(app, config) {
 
   app.use(function (err, req, res, next) {
     res.status(err.status || 500);
-      res.end('error', {
-        message: err.message,
-        error: {},
-        title: 'error'
-      });
+    res.end('error', {
+      message: err.message,
+      error: {},
+      title: 'error'
+    });
   });
 
   return app;
