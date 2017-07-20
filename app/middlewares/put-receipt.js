@@ -2,9 +2,10 @@ var mongoose = require('mongoose'),
 Receipt = mongoose.model('Receipt');
 
 module.exports = function (req, res, next) {
-  let data = req.query.data;
-  let receiptId = req.query.id;
-  Receipt.findById(receiptId, function (err, doc){
+  var data = req.body;
+  var id = req.query.id;
+
+  Receipt.findById(id, function (err, doc){
     if(doc) {
       doc.total = data.total;
       doc.type = data.type;
@@ -17,6 +18,5 @@ module.exports = function (req, res, next) {
     } else {
       res.json({error: 'No receipt found'});
     }
-    next();
   });
 }

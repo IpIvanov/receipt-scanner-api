@@ -2,11 +2,12 @@ var express = require('express'),
   router = express.Router(),
   formidable = require('../middlewares/formidable'),
   extractReceiptTotal = require('../middlewares/extract-receipt-total');
-  saveReceipt = require('../middlewares/save-receipt');
+  postReceipt = require('../middlewares/post-receipt');
   clearFile = require('../middlewares/clear-file');
   getReceipts = require('../middlewares/get-receipts');
-  deleteReceipt = require('../middlewares/delete-receipt');
-  updateReceipt = require('../middlewares/update-receipt');
+  deleteReceipt = require('../middlewares/delete-receipt'),
+  putReceipt = require('../middlewares/put-receipt'),
+  sendResult = require('../middlewares/send-result')
   mongoose = require('mongoose');
   Receipt = mongoose.model('Receipt');
 
@@ -15,11 +16,12 @@ module.exports = function (app, config) {
 
   router.route('/receipts')
     .get(getReceipts)
-    .post(saveReceipt)
+    .post(postReceipt)
     .delete(deleteReceipt)
-    .put(updateReceipt);
+    .put(putReceipt);
 
-  router.route('/receipts/scan').post(formidable, extractReceiptTotal, saveReceipt, clearFile)
+  router.route('/receipts/scan')
+    .post(formidable, extractReceiptTotal, sendResult, clearFile)
 
   router.route('/addReceipts').get(function (req, res, next) {
     let type = req.query.type;

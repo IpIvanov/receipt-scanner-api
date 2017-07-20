@@ -10,13 +10,11 @@ module.exports = function (req, res, next) {
       } else {
         res.json({error: 'No receipt found'})
       }
-      next();
     });
   }
   else {
     Receipt.find({}, function(err, receipts) {
       res.json(receipts);
-      next();
     });
   }
 }

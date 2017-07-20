@@ -2,7 +2,9 @@ var mongoose = require('mongoose'),
 Receipt = mongoose.model('Receipt');
 
 module.exports = function (req, res, next) {
-  Receipt.findOneAndRemove({ _id: req.query.id }, function (err, receipt){
+  var id = req.query.id;
+
+  Receipt.findOneAndRemove({ _id: id }, function (err, receipt){
     if(receipt) {
       res.json({success: 'Receipt deleted'});
     } else {
