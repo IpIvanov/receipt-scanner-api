@@ -10,4 +10,3 @@ var ReceiptSchema = new Schema({
 });
 
 mongoose.model('Receipt', ReceiptSchema);
-

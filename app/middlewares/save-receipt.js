@@ -3,9 +3,16 @@ var mongoose = require('mongoose'),
 
 
 module.exports = function (req, res, next) {
-  var receipt = new Receipt({
-    total: req.receiptTotal
-  })
+  if (req.query.total || req.query.type) {
+    var receipt = new Receipt({
+      total: req.query.total,
+      type: req.query.type
+    });
+  } else {
+    var receipt = new Receipt({
+      total: req.receiptTotal
+    });
+  }
 
   receipt.save(function (error, receipt) {
     if (error) {

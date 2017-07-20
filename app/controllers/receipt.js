@@ -15,9 +15,11 @@ module.exports = function (app, config) {
 
   router.route('/receipts')
     .get(getReceipts)
-    .post(formidable, extractReceiptTotal, saveReceipt, clearFile)
+    .post(saveReceipt)
     .delete(deleteReceipt)
     .put(updateReceipt);
+
+  router.route('/receipts/scan').post(formidable, extractReceiptTotal, saveReceipt, clearFile)
 
   router.route('/addReceipts').get(function (req, res, next) {
     let type = req.query.type;
