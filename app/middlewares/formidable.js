@@ -14,7 +14,6 @@ module.exports = function (req, res, next) {
     req.file = {
       path: config.root + '/temp/' + file.name
     }
-
     next();
   });
 }
