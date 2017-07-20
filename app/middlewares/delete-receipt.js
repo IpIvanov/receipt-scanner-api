@@ -10,6 +10,5 @@ module.exports = function (req, res, next) {
     } else {
       res.json({error: 'No receipt found to delete'});
     }
-    next();
   });
 }

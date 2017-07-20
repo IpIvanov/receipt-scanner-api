@@ -3,7 +3,7 @@ Receipt = mongoose.model('Receipt');
 
 module.exports = function (req, res, next) {
   var data = req.body;
-  var id = req.query.id;
+  var id = req.body.id;
 
   Receipt.findById(id, function (err, doc){
     if(doc) {
