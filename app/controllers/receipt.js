@@ -22,7 +22,7 @@ module.exports = function (app, config) {
     .put(putReceipt);
 
   router.route('/receipts/scan')
-    .post(formidable, processImage, extractReceiptTotal, sendResult, clearFile)
+    .post(formidable, processImage, extractReceiptTotal, clearFile)
 
   router.route('/addReceipts').get(function (req, res, next) {
     let type = req.query.type;

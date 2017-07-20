@@ -13,9 +13,10 @@ module.exports = function (req, res, next) {
       console.log('progress', p)
     })
     .then(function (result) {
-      var priceRegex = /\d{1,}[.|,]\d{2}/g;
-      var totalPriceRegex = /^.*total.*\d{1,}[.|,]\d{2}/gi;
-      var priceLineWithoutTotal = /^(?!.*total).*\d{1,}[.|,]\d{2}$/gi;
+      var priceRegex = /\d{1,}[.|,]\d{1,2}/;
+      var priceRegexGlobal = /\d{1,}[.|,]\d{1,2}/g;
+      var totalPriceRegex = /^.*total.*\d{1,}[.|,]\d{1,2}\D*/gi;
+      var priceLineWithoutTotal = /^(?!.*total).*\d{1,}[.|,]\d{1,2}\s{1,}.*$/gi;
       var max;
       var allLines;
       var itemLines;
@@ -36,20 +37,24 @@ module.exports = function (req, res, next) {
         var matches;
         var prices = [];
 
-        while (matches = priceRegex.exec(result.text)) {
+        while (matches = priceRegexGlobal.exec(result.text)) {
           prices.push(parseFloat(matches[0]));
         }
-        console.log(prices);
         totalPrice = Math.max.apply(null, prices);
       } else if (totalPrices.length >= 1) {
         var prices = totalPrices.map(function(element) {
           var matches = priceRegex.exec(element)
-          return parseFloat(matches[0]);
-        });
-        console.log(prices);
+          console.log(matches);
+          return parseFloat(matches[0].replace(/,/g, '.'));
+        }); 
+        console.log(prices);  
 
         totalPrice = Math.max.apply(null, prices);
       }
+      console.log(allLines);
+      console.log(itemLines);
+      console.log(totalPrice);
+      
       res.send({
         allLines: allLines,
         itemLines: itemLines,
